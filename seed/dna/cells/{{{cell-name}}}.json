@@ -1,3 +1,47 @@
 {
-  "group": "{{{cell-group}}}"
+  "group": "{{{cell-group}}}",
+  "build": {
+    "organic-site-routes": {
+      "source": "organic-express-routes",
+      "reactOn": [
+        "ExpressServer"
+      ],
+      "pattern": "/**/*.js",
+      "path": "pages",
+      "helpers": "page-helpers",
+      "emitReady": "SiteRoutesReady"
+    },
+    "organic-static-pages": {
+      "source": "organic-express-staticpages",
+      "reactOn": [
+        "ExpressServer",
+        "SiteRoutesReady"
+      ],
+      "pattern": "/**/*.ejs",
+      "path": "pages",
+      "emitReady": "StaticPagesReady"
+    },
+    "organic-express-server": {
+      "source": "organic-express-server",
+      "forceConnectionsDestroyOnClose": true,
+      "port": "@cell-ports.{{{cell-name}}}",
+      "emitReady": "ExpressServer",
+      "initScript": "init-express-app.js",
+
+      "interceptors": ["interceptors/packagejson"],
+      "responders": ["responders/default"],
+      "views": "pages",
+      "viewEngine": {
+        "ext": "ejs",
+        "name": "ejs"
+      },
+      "uploadsDir": false,
+      "cookie_secret": false,
+      "mountRespondersOn": [
+        "ExpressServer",
+        "StaticPagesReady",
+        "SiteRoutesReady"
+      ]
+    }
+  }
 }
