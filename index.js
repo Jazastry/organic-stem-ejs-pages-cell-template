@@ -15,19 +15,6 @@ const execute = async function ({destDir = process.cwd(), answers}) {
   if (!resulted_answers['cell-name']) {
     resulted_answers['cell-name'] = await stack.ask('cell-name?')
   }
-  if (!resulted_answers['cwd']) {
-    resulted_answers['cwd'] = await stack.ask(`cwd? (relative to ${destDir}/cells/)`, resulted_answers['cell-name'])
-  }
-  resulted_answers['dnaCellDirPath'] = path.dirname(resulted_answers['cwd'])
-  if (resulted_answers['dnaCellDirPath'] && resulted_answers['dnaCellDirPath'] !== '.') {
-    resulted_answers['build-branch'] = `cells.${resulted_answers['dnaCellDirPath'].split('/').join('.')}.${resulted_answers['cell-name']}.build`
-  } else {
-    resulted_answers['build-branch'] = `cells.${resulted_answers['cell-name']}.build`
-  }
-  if (!resulted_answers['cell-groups']) {
-    resulted_answers['cell-groups'] = await stack.ask('cell-groups? (can be comma separated)')
-    resulted_answers['cell-groups'] = resulted_answers['cell-groups'].split(',').map(v => v.trim())
-  }
   resulted_answers = await stack.configure({
     sourceDirs: [path.join(__dirname, 'seed')],
     answers: resulted_answers
@@ -45,7 +32,7 @@ const execute = async function ({destDir = process.cwd(), answers}) {
 if (module.parent) {
   module.exports = execute
 } else {
-  execute().catch((err) => {
+  execute({}).catch((err) => {
     console.error(err)
     process.exit(1)
   })

@@ -21,7 +21,8 @@
     "eslint-plugin-standard": "^3.0.1",
     "execa": "^0.10.0",
     "jest": "^22.4.2",
-    "terminate": "^2.1.0"
+    "terminate": "^2.1.0",
+    "organic-stem-core-template": "github:node-organic/organic-stem-core-template"
   },
   "jest": {
     "testPathIgnorePatterns": [
