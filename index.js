@@ -6,8 +6,7 @@ const path = require('path')
 const execute = async function ({destDir = process.cwd(), answers} = {}) {
   let stack = new StackUpgrade({
     destDir: destDir,
-    name: 'organic-stem-ejs-pages-cell-template',
-    version: '1.0.0'
+    packagejson: path.join(__dirname, '/package.json')
   })
   let resulted_answers = await stack.configureMergeAndUpdateJSON({
     sourceDir: path.join(__dirname, 'seed'),
