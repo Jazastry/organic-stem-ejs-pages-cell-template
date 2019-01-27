@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "organic-stack-upgrade": "node-organic/organic-stack-upgrade"
+    "organic-stack-upgrade": "^2.0.0"
   },
   "devDependencies": {
     "async-request": "^1.2.0",
